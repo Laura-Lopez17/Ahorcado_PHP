@@ -42,7 +42,7 @@ $intentos = 6;
 
 function showInfo($intentos)
 {
-    switch ($intentos) {
+    switch ($intentos) { //horca
         case 6:
             echo <<<_END
                 ____
@@ -127,7 +127,7 @@ function showInfo($intentos)
 do {
 
     showInfo($intentos);
-    echo implode("", $arrayEnmasc);
+    echo implode("", $arrayEnmasc); //muestra la frase enmascarada
     echo "\n";
     echo "\n";
     $letra = readline("Dame una letra: ");
@@ -142,8 +142,9 @@ do {
         }
 
 
-        if ($numLetras == 0) {
+        if ($numLetras == 0) { //si la letra no es correcta te muestra cuantos intentos llevas
             $intentos--;
+            showInfo($intentos);
             echo "Has fallado te quedan " . $intentos . " intentos\n";
         } else {
             echo implode("", $arrayEnmasc) . "\n";
@@ -151,26 +152,20 @@ do {
             if ($resolver == "S" || $resolver == "s") {
                 $resuelto = readline("Resuelve:");
                 if ($resuelto == $frase) { //si la resuelto es igual que la frase has ganado
-                    echo "HAS GANADO";
+                    echo "\n¡¡HAS GANADO!!";
                     break;
-                } else {
-                    $intentos--;
-                    showInfo($intentos);
-                    echo "Has fallado te quedan " . $intentos . " intentos\n";
-                }
-            }
+               }
+           }
         }
     } else {
         echo "¡ERROR! No es una letra\n";
     }
 
-
-
     $guiones = array_filter($arrayEnmasc, fn ($car) => $car == "_");
+
 } while (count($guiones) > 0 && $intentos > 0);
 
-if ($intentos == 0) {
-    showInfo($intentos);
-    echo "Oooh... Has perdido.La frase era: $frase";
+if ($intentos == 0) { //si intentos es igual a 0 has perdido
+    showInfo($intentos); //mostrar la ultima horca
+    echo "Oooh... Has perdido. La frase era: $frase";
 }
-//MOSTRAR ULTIMA PIERNA Y MENSAJE DE HAS PERDIDO
